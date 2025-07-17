@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Results - EduPortal</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background-color: #f4f6f8;
+      margin: 0; padding: 0;
+    }
+    nav {
+      background-color: #003366;
+      padding: 1rem 2rem;
+      color: white;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    nav .logo {
+      font-weight: bold;
+      font-size: 1.5rem;
+    }
+    ul.nav-links {
+      list-style: none;
+      display: flex;
+      gap: 1.5rem;
+      margin: 0;
+      padding: 0;
+    }
+    ul.nav-links li a {
+      color: white;
+      text-decoration: none;
+      font-weight: 500;
+    }
+    ul.nav-links li a:hover {
+      text-decoration: underline;
+    }
+    main {
+      max-width: 600px;
+      background: white;
+      margin: 3rem auto;
+      padding: 2rem;
+      border-radius: 10px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+    }
+    h2 {
+      text-align: center;
+      margin-bottom: 1.5rem;
+    }
+    label {
+      display: block;
+      margin: 1rem 0 0.3rem;
+      font-weight: 600;
+    }
+    input[type="text"] {
+      width: 100%;
+      padding: 0.5rem;
+      border-radius: 5px;
+      border: 1px solid #ccc;
+    }
+    button {
+      background-color: #0052cc;
+      color: white;
+      padding: 0.7rem;
+      width: 100%;
+      border: none;
+      border-radius: 5px;
+      font-size: 1.1rem;
+      cursor: pointer;
+      margin-top: 1rem;
+    }
+    button:hover {
+      background-color: #003d99;
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 1.5rem;
+    }
+    th, td {
+      border: 1px solid #ccc;
+      padding: 0.7rem;
+      text-align: left;
+    }
+    th {
+      background-color: #0052cc;
+      color: white;
+    }
+    #resultsSection {
+      display: none;
+    }
+    footer {
+      text-align: center;
+      padding: 1rem;
+      background-color: #003366;
+      color: white;
+      margin-top: 2rem;
+    }
+  </style>
+</head>
+<body>
+  <nav>
+    <div class="logo">EduPortal</div>
+    <ul class="nav-links">
+      <li><a href="index.html">Home</a></li>
+      <li><a href="register.html">Course Registration</a></li>
+      <li><a href="results.html">Results</a></li>
+      <li><a href="quiz.html">Quizzes</a></li>
+      <li><a href="people.html">People</a></li>
+      <li><a href="login.html">Login</a></li>
+    </ul>
+  </nav>
+
+  <main>
+    <h2>Check Your Results</h2>
+    <form id="resultForm">
+      <label for="studentId">Enter your Student ID:</label>
+      <input type="text" id="studentId" required />
+      <button type="submit">View Results</button>
+    </form>
+
+    <section id="resultsSection">
+      <h3>Results for <span id="resultStudentId"></span></h3>
+      <table>
+        <thead>
+          <tr>
+            <th>Course Code</th>
+            <th>Course Title</th>
+            <th>Grade</th>
+          </tr>
+        </thead>
+        <tbody id="resultsBody"></tbody>
+      </table>
+    </section>
+  </main>
+
+  <footer>
+    &copy; 2025 EduPortal - AAMUSTED LMS Prototype. All rights reserved.
+  </footer>
+
+  <script>
+    const mockResults = {
+      "AAM001": [
+        { code: "CS101", title: "Intro to Computing", grade: "A" },
+        { code: "EDU205", title: "Teaching Methods", grade: "B+" },
+        { code: "MAT102", title: "Statistics", grade: "A-" }
+      ],
+      "AAM002": [
+        { code: "CS101", title: "Intro to Computing", grade: "B" },
+        { code: "EDU205", title: "Teaching Methods", grade: "C+" },
+        { code: "MAT102", title: "Statistics", grade: "B" }
+      ]
+    };
+
+    const form = document.getElementById('resultForm');
+    const resultsSection = document.getElementById('resultsSection');
+    const resultStudentId = document.getElementById('resultStudentId');
+    const resultsBody = document.getElementById('resultsBody');
+
+    form.addEventListener('submit', function(e) {
+      e.preventDefault();
+      const id = document.getElementById('studentId').value.trim().toUpperCase();
+
+      if (!mockResults[id]) {
+        alert('No results found for this Student ID.');
+        resultsSection.style.display = 'none';
+        return;
+      }
+
+      resultStudentId.textContent = id;
+      resultsBody.innerHTML = '';
+
+      mockResults[id].forEach(({code, title, grade}) => {
+        const row = document.createElement('tr');
+        row.innerHTML = `<td>${code}</td><td>${title}</td><td>${grade}</td>`;
+        resultsBody.appendChild(row);
+      });
+
+      resultsSection.style.display = 'block';
+    });
+  </script>
+</body>
+</html>
