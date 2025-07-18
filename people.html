@@ -129,5 +129,14 @@ nav {
   <footer>
     &copy; 2025 EduPortal - AAMUSTED LMS Prototype. All rights reserved.
   </footer>
+  <script>
+  const toggle = document.querySelector('.menu-toggle');
+  const navLinks = document.querySelector('.nav-links');
+
+  toggle?.addEventListener('click', () => {
+    navLinks?.classList.toggle('show');
+  });
+</script>
+
 </body>
 </html>

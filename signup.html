@@ -226,6 +226,14 @@
         window.location.href = 'login.html';
       }, 2000);
     });
+
+  const toggle = document.querySelector('.menu-toggle');
+  const navLinks = document.querySelector('.nav-links');
+
+  toggle?.addEventListener('click', () => {
+    navLinks?.classList.toggle('show');
+  });
+
   </script>
 </body>
 </html>
