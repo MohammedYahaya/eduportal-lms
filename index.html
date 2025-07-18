@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -9,6 +10,10 @@
       box-sizing: border-box;
       margin: 0;
       padding: 0;
+    }
+
+    html {
+      scroll-behavior: smooth;
     }
 
     body {
@@ -25,60 +30,18 @@
       align-items: center;
       padding: 1rem 2rem;
       box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+      position: relative;
     }
-    .navbar {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  background-color: #003366;
-  color: white;
-  padding: 10px 20px;
-}
-
-.navbar .nav-links {
-  display: flex;
-  gap: 20px;
-  list-style: none;
-}
-
-.navbar .nav-links a {
-  color: white;
-  text-decoration: none;
-}
-
-.toggle-btn {
-  display: none;
-  font-size: 24px;
-  background: none;
-  border: none;
-  color: white;
-  cursor: pointer;
-}
-
-@media (max-width: 768px) {
-  .toggle-btn {
-    display: block;
-  }
-
-  .nav-links {
-    display: none;
-    flex-direction: column;
-    background: blue;
-    position: absolute;
-    top: 60px;
-    right: 20px;
-    padding: 10px;
-    border-radius: 5px;
-  }
-
-  .nav-links.show {
-    display: flex;
-  }
-}
 
     .logo {
       font-size: 1.5rem;
       font-weight: bold;
+    }
+
+    .menu-toggle {
+      display: none;
+      font-size: 1.5rem;
+      cursor: pointer;
     }
 
     ul.nav-links {
@@ -95,6 +58,28 @@
 
     ul.nav-links li a:hover {
       text-decoration: underline;
+    }
+
+    @media (max-width: 768px) {
+      ul.nav-links {
+        display: none;
+        flex-direction: column;
+        width: 100%;
+        background-color: #003366;
+        position: absolute;
+        top: 60px;
+        left: 0;
+        z-index: 1000;
+        padding: 1rem 0;
+      }
+
+      ul.nav-links.show {
+        display: flex;
+      }
+
+      .menu-toggle {
+        display: block;
+      }
     }
 
     .hero {
@@ -143,21 +128,20 @@
   </style>
 </head>
 <body>
-  <header>
-  <nav class="navbar">
+  <nav>
     <div class="logo">EduPortal</div>
-    <button class="toggle-btn" onclick="toggleNavbar()">☰</button>
-    <ul class="nav-links" id="navLinks">
+    <div class="menu-toggle" onclick="toggleMenu()">☰</div>
+    <ul class="nav-links">
       <li><a href="index.html">Home</a></li>
       <li><a href="signup.html">Sign Up</a></li>
       <li><a href="register.html">Course Registration</a></li>
-      <li><a href="services.html">Services</a></li>
+      <li><a href="results.html">Results</a></li>
+      <li><a href="quiz.html">Quizzes</a></li>
       <li><a href="people.html">People</a></li>
-      <li><a href="quiz.html">Quiz</a></li>
       <li><a href="login.html">Login</a></li>
     </ul>
   </nav>
-</header>
+
   <section class="hero">
     <h1>Welcome to AAMUSTED Learning Portal</h1>
     <p>Empowering students with tools to register courses, check results, and take quizzes</p>
@@ -181,11 +165,11 @@
   <footer>
     &copy; 2025 EduPortal - AAMUSTED LMS Prototype. All rights reserved.
   </footer>
-  <script>
-  function toggleNavbar() {
-    document.getElementById("navLinks").classList.toggle("show");
-  }
-</script>
 
+  <script>
+    function toggleMenu() {
+      document.querySelector('.nav-links').classList.toggle('show');
+    }
+  </script>
 </body>
 </html>
